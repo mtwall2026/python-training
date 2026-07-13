@@ -81,7 +81,7 @@
                         <div class="code-editor">
                             <div class="editor-header">
                                 <span>Python Code</span>
-                                <button onclick="runCode()" class="btn-small btn-primary">▶ Run</button>
+                                <button id="runBtn" onclick="runCode()" class="btn-small btn-primary">▶ Run</button>
                             </div>
                             <textarea id="codeInput" class="code-input" spellcheck="false"></textarea>
                         </div>
@@ -99,6 +99,9 @@
         </main>
     </div>
 
+    <!-- Pyodide runs real CPython (compiled to WebAssembly) in the browser so the
+         code simulations execute actual Python instead of faking it with JS eval() -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

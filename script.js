@@ -1691,34 +1691,74 @@ function displaySimulation(module) {
     document.getElementById('simDescription').textContent = module.description;
     document.getElementById('codeInput').value = module.template;
     document.getElementById('codeOutput').innerHTML = '';
+
+    // Start fetching the Python runtime now so it's likely ready by the time
+    // the learner clicks "Run" instead of making them wait on first use.
+    getPyodideRuntime().catch(() => {});
+}
+
+// --- Real Python execution via Pyodide (CPython compiled to WebAssembly) ---
+let pyodideReadyPromise = null;
+let pyodideOutputLines = [];
+
+function getPyodideRuntime() {
+    if (!pyodideReadyPromise) {
+        const load = typeof loadPyodide === 'undefined'
+            ? Promise.reject(new Error('The Python runtime failed to load. Check your internet connection and reload the page.'))
+            : loadPyodide().then(pyodide => {
+                const capture = (line) => pyodideOutputLines.push(line);
+                pyodide.setStdout({ batched: capture });
+                pyodide.setStderr({ batched: capture });
+                return pyodide;
+            });
+
+        // Don't cache a failure forever - let the next Run attempt retry
+        // (e.g. the learner's connection recovers) instead of requiring a reload.
+        pyodideReadyPromise = load.catch(error => {
+            pyodideReadyPromise = null;
+            throw error;
+        });
+    }
+    return pyodideReadyPromise;
+}
+
+// Pyodide's traceback includes internal interpreter frames; keep only the
+// part starting at the learner's own code (File "<exec>") so errors read
+// like a normal Python error instead of a wall of WebAssembly internals.
+function formatPythonError(error) {
+    const message = String((error && error.message) || error);
+    const lines = message.trimEnd().split('\n');
+    const lastExecFrame = lines.map(line => line.includes('File "<exec>"')).lastIndexOf(true);
+    return (lastExecFrame === -1 ? lines : lines.slice(lastExecFrame)).join('\n');
 }
 
 // Run code simulation
-function runCode() {
+async function runCode() {
     const code = document.getElementById('codeInput').value;
     const output = document.getElementById('codeOutput');
-    output.innerHTML = '';
+    const runBtn = document.getElementById('runBtn');
+    const originalLabel = runBtn.textContent;
 
-    // Capture console output
-    const logs = [];
-    const originalLog = console.log;
-
-    console.log = function(...args) {
-        logs.push(args.map(arg => String(arg)).join(' '));
-        originalLog.apply(console, args);
-    };
+    runBtn.disabled = true;
+    output.innerHTML = '<p style="color: #999;">Starting Python…</p>';
 
     try {
-        eval(code);
-        if (logs.length === 0) {
+        const pyodide = await getPyodideRuntime();
+        runBtn.textContent = '▶ Running…';
+        pyodideOutputLines = [];
+
+        await pyodide.runPythonAsync(code);
+
+        if (pyodideOutputLines.length === 0) {
             output.innerHTML = '<p style="color: #999;">No output (program ran successfully)</p>';
         } else {
-            output.innerHTML = logs.map(log => `<div>${escapeHtml(log)}</div>`).join('');
+            output.innerHTML = pyodideOutputLines.map(line => `<div>${escapeHtml(line)}</div>`).join('');
         }
     } catch (error) {
-        output.innerHTML = `<div style="color: #ff6b6b;"><strong>Error:</strong> ${escapeHtml(error.message)}</div>`;
+        output.innerHTML = `<div style="color: #ff6b6b; white-space: pre-wrap;"><strong>Error:</strong>\n${escapeHtml(formatPythonError(error))}</div>`;
     } finally {
-        console.log = originalLog;
+        runBtn.disabled = false;
+        runBtn.textContent = originalLabel;
     }
 }
 

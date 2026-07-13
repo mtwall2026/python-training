@@ -15,7 +15,7 @@ A comprehensive, interactive web-based Python training program designed for comp
 
 💻 **Code Simulations**
 - Practice writing Python code directly in the browser
-- Real-time code execution with output display
+- Runs *real* Python (via [Pyodide](https://pyodide.org), CPython compiled to WebAssembly) — not a JavaScript approximation, so f-strings, `print()`, list/dict methods, and real Python errors all behave exactly as they would on your machine
 - Hands-on exercises for each topic
 
 📊 **Progress Tracking**
@@ -98,9 +98,9 @@ A comprehensive, interactive web-based Python training program designed for comp
 ## Technical Details
 
 - **Built with:** HTML5, CSS3, and JavaScript (Vanilla)
+- **Python runtime:** [Pyodide](https://pyodide.org) (CPython via WebAssembly), loaded from a CDN
 - **Storage:** Uses browser's localStorage for progress persistence
-- **Requirements:** Modern web browser with JavaScript enabled
-- **No dependencies:** Runs completely offline
+- **Requirements:** Modern web browser with JavaScript enabled and an internet connection (needed the first time to download the Python runtime; lessons and quizzes work offline, but code simulations need connectivity at least once)
 
 ## Browser Support
 
@@ -124,6 +124,7 @@ A comprehensive, interactive web-based Python training program designed for comp
 - Make sure the Python syntax is correct
 - Check for missing colons (:) at the end of lines with conditions or functions
 - Check indentation (Python cares about spaces)
+- The first time you click "Run" in a session, the page needs to download the Python runtime, which can take a few seconds on a slow connection — subsequent runs are fast
 
 **Progress not saving?**
 - Make sure your browser allows localStorage
