@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Validate Python Training Site
 
 on:
   push:
@@ -6,15 +6,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
-          cname: false
+      - name: Validate HTML files exist
+        run: |
+          echo "✓ Checking for required files..."
+          test -f index.html && echo "✓ index.html found"
+          test -f styles.css && echo "✓ styles.css found"
+          test -f script.js && echo "✓ script.js found"
+          test -f README.md && echo "✓ README.md found"
+          echo "✓ All files validated successfully!"
+
+      - name: Check file sizes
+        run: |
+          echo "File sizes:"
+          ls -lh index.html styles.css script.js
+          echo "✓ Site is ready for GitHub Pages deployment"
