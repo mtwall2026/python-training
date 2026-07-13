@@ -403,9 +403,9 @@ subtotal = price_per_item * quantity  # 45
 tax = subtotal * tax_rate             # 4.50
 total = subtotal + tax                # 49.50
 
-print(f"Subtotal: ${subtotal}")
-print(f"Tax: ${tax:.2f}")
-print(f"Total: ${total:.2f}")</pre>
+print(f"Subtotal: \${subtotal}")
+print(f"Tax: \${tax:.2f}")
+print(f"Total: \${total:.2f}")</pre>
         `
     },
     {
@@ -990,7 +990,7 @@ print(numbers[1:4])      # [1, 2, 3] (from index 1 to 3, not including 4)
 print(numbers[:5])       # [0, 1, 2, 3, 4] (from start to index 4)
 print(numbers[5:])       # [5, 6, 7, 8, 9] (from index 5 to end)
 print(numbers[-3:])      # [7, 8, 9] (last 3 items)
-print(numbers[::2])      # [0, 2, 4, 6, 8] (every 2nd item)</print>
+print(numbers[::2])      # [0, 2, 4, 6, 8] (every 2nd item)</pre>
 
             <p><strong>Remember: The end index is exclusive (not included)!</strong></p>
 
@@ -1076,7 +1076,7 @@ for i in range(len(fruits)):
 
 # Using enumerate (Python's way!)
 for index, fruit in enumerate(fruits):
-    print(f"{index}: {fruit}")</press>
+    print(f"{index}: {fruit}")</pre>
 
             <h3>Dictionaries - Key-Value Storage</h3>
             <p>Dictionaries store data as pairs: a key connects to a value. Like a real dictionary where the word is the key and the definition is the value.</p>
@@ -1116,7 +1116,7 @@ if "name" in person:
 
 # Get with default
 age = person.get("age")       # 30
-phone = person.get("phone", "Not provided")  # "Not provided" (default)</press>
+phone = person.get("phone", "Not provided")  # "Not provided" (default)</pre>
 
             <h3>Practical Example - Contact Book</h3>
             <pre>contacts = {
@@ -1137,7 +1137,7 @@ for name, email in contacts.items():
 
 # Add new contact
 contacts["Diana"] = "diana@email.com"
-print(f"\\nTotal contacts: {len(contacts)}")</press>
+print(f"\\nTotal contacts: {len(contacts)}")</pre>
         `
     },
     {
@@ -1254,7 +1254,7 @@ print(f"Total students: {len(students)}")`
             <p>Use the <code>def</code> keyword to create a function:</p>
 
             <pre>def greet():
-    print("Hello, World!")</press>
+    print("Hello, World!")</pre>
 
             <p><strong>Structure:</strong></p>
             <ul>
@@ -1273,12 +1273,12 @@ print(f"Total students: {len(students)}")`
 
 greet()  # Function call - this makes it run!
 greet()  # Can call it again
-greet()  # And again!</press>
+greet()  # And again!</pre>
 
             <p><strong>Output:</strong></p>
             <pre>Hello, World!
 Hello, World!
-Hello, World!</press>
+Hello, World!</pre>
 
             <h3>Parameters & Arguments - Giving Functions Input</h3>
             <p>Parameters allow functions to receive input data:</p>
@@ -1287,7 +1287,7 @@ Hello, World!</press>
     print(f"Hello, {name}!")
 
 greet("Alice")   # "Alice" is an argument
-greet("Bob")     # "Bob" is an argument</press>
+greet("Bob")     # "Bob" is an argument</pre>
 
             <p><strong>Important distinction:</strong></p>
             <ul>
@@ -1301,7 +1301,7 @@ greet("Bob")     # "Bob" is an argument</press>
     print(f"{a} + {b} = {result}")
 
 add(5, 3)   # Output: 5 + 3 = 8
-add(10, 20) # Output: 10 + 20 = 30</press>
+add(10, 20) # Output: 10 + 20 = 30</pre>
 
             <h3>Return Values - Getting Output From Functions</h3>
             <p>Functions can return values using the <code>return</code> keyword:</p>
@@ -1313,7 +1313,7 @@ result = add(5, 3)
 print(result)  # 8
 
 total = add(10, 20) + add(5, 5)
-print(total)   # 40</press>
+print(total)   # 40</pre>
 
             <p><strong>Why return instead of print?</strong></p>
             <ul>
@@ -1330,7 +1330,7 @@ print(total)   # 40</press>
         return a / b
 
 print(divide(10, 2))  # 5.0
-print(divide(10, 0))  # Error: Cannot divide by zero</press>
+print(divide(10, 0))  # Error: Cannot divide by zero</pre>
 
             <h3>Default Parameters - Optional Input</h3>
             <p>Parameters can have default values:</p>
@@ -1339,7 +1339,7 @@ print(divide(10, 0))  # Error: Cannot divide by zero</press>
     print(f"Hello, {name}!")
 
 greet()          # Uses default: Hello, Guest!
-greet("Alice")   # Overrides default: Hello, Alice!</press>
+greet("Alice")   # Overrides default: Hello, Alice!</pre>
 
             <p><strong>Practical example - website defaults:</strong></p>
             <pre>def create_account(username, password="default123", is_admin=False):
@@ -1349,7 +1349,7 @@ greet("Alice")   # Overrides default: Hello, Alice!</press>
 
 create_account("john")  # Uses defaults
 create_account("jane", "secure456")  # Custom password
-create_account("admin", is_admin=True)  # Named parameter</press>
+create_account("admin", is_admin=True)  # Named parameter</pre>
 
             <h3>Scope - Where Variables Live</h3>
             <p>Variables exist only in their scope:</p>
@@ -1359,7 +1359,7 @@ create_account("admin", is_admin=True)  # Named parameter</press>
     print(local_var)
 
 my_function()  # Output: 10
-print(local_var)  # ERROR! NameError: name 'local_var' is not defined</press>
+print(local_var)  # ERROR! NameError: name 'local_var' is not defined</pre>
 
             <p><strong>Global vs Local scope:</strong></p>
             <pre>global_var = 100  # Lives outside functions - global scope
@@ -1375,7 +1375,7 @@ def function2():
     print(local_var)  # Output: 75
 
 function2()
-print(local_var)  # ERROR! (local_var only in functions)</press>
+print(local_var)  # ERROR! (local_var only in functions)</pre>
 
             <h3>Documentation - Docstrings</h3>
             <p>Document your functions so others (and future-you) understand them:</p>
