@@ -1628,6 +1628,8 @@ function displayQuizQuestion(module) {
     });
 
     document.getElementById('feedbackDiv').classList.add('hidden');
+    document.getElementById('submitBtn').classList.remove('hidden');
+    document.getElementById('quizContinueBtn').classList.add('hidden');
 }
 
 // Select answer
@@ -1635,6 +1637,9 @@ function selectAnswer(index) {
     currentQuizAnswers[currentQuestionIndex] = index;
     displayQuizQuestion(trainingModules[currentModuleIndex]);
 }
+
+// What "Continue" should do once the learner has read the feedback and taps it
+let quizAdvanceAction = null; // 'nextQuestion' | 'nextModule'
 
 // Submit answer
 function submitAnswer() {
@@ -1653,33 +1658,51 @@ function submitAnswer() {
 
     if (isCorrect) {
         feedbackDiv.classList.add('success');
-        feedbackDiv.innerHTML = `
+        const isLastQuestion = currentQuestionIndex === module.questions.length - 1;
+
+        feedbackDiv.innerHTML = isLastQuestion
+            ? `
+            <strong>✓ Correct! Quiz completed - you got every question right!</strong>
+            <p style="margin-top: 10px; font-size: 0.95em;">${question.explanation}</p>
+        `
+            : `
             <strong>✓ Correct! Excellent work!</strong>
             <p style="margin-top: 10px; font-size: 0.95em;">${question.explanation}</p>
         `;
 
-        // Move to next question after delay
-        setTimeout(() => {
-            if (currentQuestionIndex < module.questions.length - 1) {
-                currentQuestionIndex++;
-                displayQuizQuestion(module);
-            } else {
-                markModuleAsCompleted();
-                feedbackDiv.innerHTML = `
-                    <strong>✓ Quiz completed! You got all questions correct!</strong>
-                    <p style="margin-top: 10px;">Moving to next module...</p>
-                `;
-                setTimeout(() => nextLesson(), 1500);
-            }
-        }, 2000);
+        // Stay on screen until the learner taps Continue - no auto-advance timer.
+        quizAdvanceAction = isLastQuestion ? 'nextModule' : 'nextQuestion';
+        document.getElementById('submitBtn').classList.add('hidden');
+        const continueBtn = document.getElementById('quizContinueBtn');
+        continueBtn.textContent = isLastQuestion ? 'Finish Quiz →' : 'Continue →';
+        continueBtn.classList.remove('hidden');
+
+        if (isLastQuestion) {
+            markModuleAsCompleted();
+        }
     } else {
         feedbackDiv.classList.add('error');
         feedbackDiv.innerHTML = `
             <strong>✗ Not quite right. Let me explain:</strong>
             <p style="margin-top: 10px; font-size: 0.95em;"><strong>Correct Answer:</strong> ${question.options[question.correct]}</p>
             <p style="margin-top: 8px; font-size: 0.95em;"><strong>Why:</strong> ${question.explanation}</p>
-            <p style="margin-top: 8px; color: #ffeb3b;">Try again or click Next to move on.</p>
+            <p style="margin-top: 8px; color: #ffeb3b;">Select the correct answer above and submit again.</p>
         `;
+        // Submit button stays visible so the learner can pick a new option and retry.
+    }
+}
+
+// Move on after the learner has read the feedback for a correct answer
+function continueQuiz() {
+    const module = trainingModules[currentModuleIndex];
+    const action = quizAdvanceAction;
+    quizAdvanceAction = null;
+
+    if (action === 'nextQuestion') {
+        currentQuestionIndex++;
+        displayQuizQuestion(module);
+    } else if (action === 'nextModule') {
+        nextLesson();
     }
 }
 
