@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Training Program for Beginners</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="training-header">
+            <h1>🐍 Python Training Program</h1>
+            <p>Learn Python from Scratch - Interactive Training for Beginners</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="progress-text" id="progressText">Progress: 0%</p>
+        </header>
+
+        <main class="training-content">
+            <!-- Module Navigation -->
+            <aside class="module-sidebar">
+                <div class="modules-list">
+                    <h3>Modules</h3>
+                    <ul id="modulesList"></ul>
+                </div>
+                <div class="stats">
+                    <h4>Your Stats</h4>
+                    <p>✓ Completed: <span id="completedCount">0</span></p>
+                    <p>📚 Total: <span id="totalCount">0</span></p>
+                    <button onclick="resetProgress()" class="btn-reset">Reset Progress</button>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <section class="main-panel">
+                <!-- Lesson View -->
+                <div id="lessonView" class="view-panel">
+                    <div class="lesson-header">
+                        <h2 id="lessonTitle"></h2>
+                        <p id="lessonDescription"></p>
+                    </div>
+                    <div id="lessonContent" class="lesson-content"></div>
+                    <div class="lesson-actions">
+                        <button id="prevBtn" onclick="previousLesson()" class="btn btn-secondary">← Previous</button>
+                        <button id="nextBtn" onclick="nextLesson()" class="btn btn-primary">Next →</button>
+                    </div>
+                </div>
+
+                <!-- Quiz View -->
+                <div id="quizView" class="view-panel hidden">
+                    <div class="quiz-header">
+                        <h2 id="quizTitle"></h2>
+                        <div class="quiz-progress">
+                            <span id="currentQuestion">1</span> / <span id="totalQuestions">5</span>
+                        </div>
+                    </div>
+                    <div id="quizContent" class="quiz-content">
+                        <p id="questionText"></p>
+                        <div id="optionsContainer" class="options-container"></div>
+                    </div>
+                    <div class="quiz-actions">
+                        <button id="submitBtn" onclick="submitAnswer()" class="btn btn-primary">Submit</button>
+                        <div id="feedbackDiv" class="feedback hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Simulation View -->
+                <div id="simulationView" class="view-panel hidden">
+                    <div class="simulation-header">
+                        <h2 id="simTitle"></h2>
+                        <p id="simDescription"></p>
+                    </div>
+                    <div class="simulation-container">
+                        <div class="code-editor">
+                            <div class="editor-header">
+                                <span>Python Code</span>
+                                <button onclick="runCode()" class="btn-small btn-primary">▶ Run</button>
+                            </div>
+                            <textarea id="codeInput" class="code-input" spellcheck="false"></textarea>
+                        </div>
+                        <div class="code-output">
+                            <div class="output-header">Output</div>
+                            <div id="codeOutput" class="output-area"></div>
+                        </div>
+                    </div>
+                    <div class="sim-actions">
+                        <button id="simPrevBtn" onclick="previousLesson()" class="btn btn-secondary">← Previous</button>
+                        <button id="simNextBtn" onclick="nextLesson()" class="btn btn-primary">Next →</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
