@@ -1694,10 +1694,13 @@ function submitAnswer() {
 
 // Move on after the learner has read the feedback for a correct answer
 function continueQuiz() {
-    const module = trainingModules[currentModuleIndex];
     const action = quizAdvanceAction;
+    if (action === null) {
+        return; // already handled (e.g. a stray double tap) - ignore
+    }
     quizAdvanceAction = null;
 
+    const module = trainingModules[currentModuleIndex];
     if (action === 'nextQuestion') {
         currentQuestionIndex++;
         displayQuizQuestion(module);
