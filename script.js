@@ -839,5 +839,62 @@ function resetProgress() {
     }
 }
 
+// Mobile sidebar toggle
+function toggleSidebar() {
+    const sidebar = document.querySelector('.module-sidebar');
+    sidebar.classList.toggle('mobile-open');
+}
+
+// Close sidebar when selecting a module on mobile
+function closeSidebarOnMobile() {
+    if (window.innerWidth <= 768) {
+        const sidebar = document.querySelector('.module-sidebar');
+        sidebar.classList.remove('mobile-open');
+    }
+}
+
+// Close sidebar when clicking outside on mobile
+document.addEventListener('click', function(event) {
+    const sidebar = document.querySelector('.module-sidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+
+    if (window.innerWidth <= 768 && sidebar.classList.contains('mobile-open')) {
+        if (!sidebar.contains(event.target) && !toggleBtn.contains(event.target)) {
+            sidebar.classList.remove('mobile-open');
+        }
+    }
+});
+
+// Update module selection to close sidebar on mobile
+const originalNextLesson = nextLesson;
+const originalPreviousLesson = previousLesson;
+
+window.nextLesson = function() {
+    originalNextLesson();
+    closeSidebarOnMobile();
+};
+
+window.previousLesson = function() {
+    originalPreviousLesson();
+    closeSidebarOnMobile();
+};
+
+// Prevent body scroll when sidebar is open on mobile
+function updateBodyScroll() {
+    const sidebar = document.querySelector('.module-sidebar');
+    if (window.innerWidth <= 768 && sidebar.classList.contains('mobile-open')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+}
+
+window.addEventListener('resize', updateBodyScroll);
+document.querySelector('.module-sidebar').addEventListener('click', function(e) {
+    if (e.target.tagName === 'BUTTON') {
+        closeSidebarOnMobile();
+    }
+});
+
 // Start the program
 window.addEventListener('DOMContentLoaded', initializeTraining);
