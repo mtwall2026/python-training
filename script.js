@@ -248,35 +248,24 @@ y = True</pre>
         id: 4,
         title: "Simulation: Create Variables & Check Types",
         type: "simulation",
-        description: "Create different variables with different data types and use print() and type() to display them. Try changing the values and observe how types change.",
-        template: `# Explore Variables and Data Types
-# Create variables of different types
-name = "Alice"
-age = 25
-height = 5.8
-is_student = True
+        description: "Fill in the four variables below so each one has the exact type described in the comment.",
+        template: `# TODO: Replace each None below with a real value of the correct type.
+name = None          # should be a string (str)
+age = None            # should be a whole number greater than 0 (int)
+height = None          # should be a float (a number with a decimal point)
+is_student = None       # should be a boolean: True or False
 
-# Display the variables
-print("Name:", name)
-print("Age:", age)
-print("Height:", height)
-print("Is Student:", is_student)
-
-# Check their types
-print("\\nData Types:")
-print("Type of name:", type(name))
-print("Type of age:", type(age))
-print("Type of height:", type(height))
-print("Type of is_student:", type(is_student))
-
-# Try modifying values
-age = 26
-print("\\nAfter modification:")
-print("New age:", age, "- Type:", type(age))
-
-# Type conversion
-age_as_text = str(age)
-print("Age as text:", age_as_text, "- Type:", type(age_as_text))`
+# Don't edit below this line - this just shows what you created
+print("name:", name, "->", type(name))
+print("age:", age, "->", type(age))
+print("height:", height, "->", type(height))
+print("is_student:", is_student, "->", type(is_student))`,
+        checks: [
+            { description: "`name` is a string", test: "isinstance(name, str)", hint: "Wrap it in quotes, e.g. name = \"Alex\"" },
+            { description: "`age` is a whole number greater than 0", test: "isinstance(age, int) and not isinstance(age, bool) and age > 0", hint: "Use a whole number without quotes, e.g. age = 30" },
+            { description: "`height` is a float (has a decimal point)", test: "isinstance(height, float)", hint: "Add a decimal point, e.g. height = 5.9" },
+            { description: "`is_student` is a boolean", test: "isinstance(is_student, bool)", hint: "Use exactly True or False (capitalized, no quotes)" }
+        ]
     },
     {
         id: 5,
@@ -641,40 +630,24 @@ print(f"Score: {score}, Grade: {grade}, Status: {status}")</pre>
         id: 8,
         title: "Simulation: Temperature Grade Classifier",
         type: "simulation",
-        description: "Write a program that classifies temperatures and decides on appropriate clothing. Use if/elif/else statements.",
-        template: `# Temperature Classification System
-# Classify temperature and suggest clothing
+        description: "Write a function `classify_temperature(temperature)` that returns the correct condition string for any temperature.",
+        template: `def classify_temperature(temperature):
+    # TODO: return "Hot" if temperature >= 85
+    #       return "Warm" if temperature >= 70
+    #       return "Mild" if temperature >= 50
+    #       otherwise return "Cold"
+    pass
 
-temperature = 75  # Fahrenheit
-is_humid = False
-
-print(f"Temperature: {temperature}°F")
-print("-" * 40)
-
-# Check temperature ranges
-if temperature >= 85:
-    condition = "Hot"
-    suggestion = "Wear light, breathable clothing"
-elif temperature >= 70:
-    condition = "Warm"
-    suggestion = "Short sleeves or light jacket"
-elif temperature >= 50:
-    condition = "Mild"
-    suggestion = "A light jacket is recommended"
-else:
-    condition = "Cold"
-    suggestion = "Wear a heavy coat and warm clothes"
-
-print(f"Condition: {condition}")
-print(f"Suggestion: {suggestion}")
-
-# Check humidity for additional advice
-if is_humid and temperature >= 70:
-    print("⚠ High humidity detected! Drink water frequently.")
-
-# Fun fact checker
-if temperature == 32:
-    print("Fun fact: This is the freezing point of water!")`
+print(classify_temperature(75))
+print(classify_temperature(90))
+print(classify_temperature(40))`,
+        checks: [
+            { description: "classify_temperature(90) is \"Hot\"", test: "classify_temperature(90) == \"Hot\"", hint: "90 is 85 or above, so it should be \"Hot\"" },
+            { description: "classify_temperature(85) is \"Hot\" (boundary)", test: "classify_temperature(85) == \"Hot\"", hint: "85 itself counts as Hot - use >= not just >" },
+            { description: "classify_temperature(75) is \"Warm\"", test: "classify_temperature(75) == \"Warm\"", hint: "70-84 should be \"Warm\"" },
+            { description: "classify_temperature(60) is \"Mild\"", test: "classify_temperature(60) == \"Mild\"", hint: "50-69 should be \"Mild\"" },
+            { description: "classify_temperature(30) is \"Cold\"", test: "classify_temperature(30) == \"Cold\"", hint: "Anything below 50 should be \"Cold\"" }
+        ]
     },
     {
         id: 9,
@@ -911,32 +884,26 @@ print(f"Average: {average}")</pre>
         id: 11,
         title: "Simulation: Multiplication Table Generator",
         type: "simulation",
-        description: "Create a program that generates and displays a multiplication table. Use nested loops to create rows and columns.",
-        template: `# Multiplication Table Generator
-# This demonstrates nested loops
+        description: "Write `multiplication_row(n, size)` and `multiplication_table(size)` to generate a multiplication table.",
+        template: `def multiplication_row(n, size):
+    # TODO: return a list of the first \`size\` multiples of n
+    # e.g. multiplication_row(3, 5) -> [3, 6, 9, 12, 15]
+    pass
 
-table_size = 7
+def multiplication_table(size):
+    # TODO: return a list of \`size\` rows, where row i (starting at 1)
+    # is multiplication_row(i, size)
+    # e.g. multiplication_table(3) -> [[1, 2, 3], [2, 4, 6], [3, 6, 9]]
+    pass
 
-print("Multiplication Table (1-7)")
-print("-" * 35)
-
-# Print header
-print("   |", end="")
-for i in range(1, table_size + 1):
-    print(f"{i:4}", end="")
-print()
-print("-" * 35)
-
-# Print rows
-for i in range(1, table_size + 1):
-    print(f" {i} |", end="")  # Row number
-    for j in range(1, table_size + 1):
-        product = i * j
-        print(f"{product:4}", end="")
-    print()  # New line after each row
-
-print("-" * 35)
-print("\\nTry changing table_size to see different sizes!")`
+print(multiplication_row(3, 5))
+print(multiplication_table(3))`,
+        checks: [
+            { description: "multiplication_row(3, 5) == [3, 6, 9, 12, 15]", test: "multiplication_row(3, 5) == [3, 6, 9, 12, 15]", hint: "Multiply n by 1, 2, 3, ... up to size" },
+            { description: "multiplication_row(1, 4) == [1, 2, 3, 4]", test: "multiplication_row(1, 4) == [1, 2, 3, 4]", hint: "Check your loop covers 1 through size, inclusive" },
+            { description: "multiplication_table(3) builds the right rows", test: "multiplication_table(3) == [[1, 2, 3], [2, 4, 6], [3, 6, 9]]", hint: "Row i should be multiplication_row(i, size) for i from 1 to size" },
+            { description: "multiplication_table(5) has 5 rows", test: "len(multiplication_table(5)) == 5", hint: "Make sure you're building one row per number from 1 to size" }
+        ]
     },
     {
         id: 12,
@@ -1187,49 +1154,27 @@ print(f"\\nTotal contacts: {len(contacts)}")</pre>
         id: 14,
         title: "Simulation: Student Grade Manager",
         type: "simulation",
-        description: "Create a program that manages student data using lists and dictionaries. Add students, calculate averages, and display information.",
-        template: `# Student Grade Management System
-students = []
+        description: "Write `average_grade(grades)` and `grade_status(average)` to summarize a student's performance.",
+        template: `def average_grade(grades):
+    # TODO: return the average of the numbers in the grades list
+    pass
 
-# Add student data
-student1 = {
-    "name": "Alice",
-    "grades": [90, 85, 92],
-    "email": "alice@school.com"
-}
+def grade_status(average):
+    # TODO: return "Excellent!" if average >= 90
+    #       return "Good" if average >= 80
+    #       otherwise return "Needs Improvement"
+    pass
 
-student2 = {
-    "name": "Bob",
-    "grades": [78, 82, 88],
-    "email": "bob@school.com"
-}
-
-students.append(student1)
-students.append(student2)
-
-# Display all students and their averages
-print("Student Grade Report")
-print("=" * 50)
-
-for student in students:
-    name = student["name"]
-    grades = student["grades"]
-    average = sum(grades) / len(grades)
-
-    print(f"\\nName: {name}")
-    print(f"Email: {student['email']}")
-    print(f"Grades: {grades}")
-    print(f"Average: {average:.2f}")
-
-    if average >= 90:
-        print("Status: ✓ Excellent!")
-    elif average >= 80:
-        print("Status: Good")
-    else:
-        print("Status: Needs Improvement")
-
-print("\\n" + "=" * 50)
-print(f"Total students: {len(students)}")`
+print(average_grade([90, 85, 92]))
+print(grade_status(89))`,
+        checks: [
+            { description: "average_grade([90, 85, 92]) == 89", test: "average_grade([90, 85, 92]) == 89", hint: "Average = sum of the list divided by how many items it has" },
+            { description: "average_grade([100, 100]) == 100", test: "average_grade([100, 100]) == 100", hint: "sum(grades) / len(grades)" },
+            { description: "grade_status(95) == \"Excellent!\"", test: "grade_status(95) == \"Excellent!\"", hint: "90 and above should be Excellent!" },
+            { description: "grade_status(90) == \"Excellent!\" (boundary)", test: "grade_status(90) == \"Excellent!\"", hint: "90 itself counts as Excellent - use >= not just >" },
+            { description: "grade_status(82) == \"Good\"", test: "grade_status(82) == \"Good\"", hint: "80-89 should be Good" },
+            { description: "grade_status(50) == \"Needs Improvement\"", test: "grade_status(50) == \"Needs Improvement\"", hint: "Below 80 should be Needs Improvement" }
+        ]
     },
     {
         id: 15,
@@ -1469,61 +1414,36 @@ print(f"{f_temp}°F = {c_temp}°C")</pre>
         id: 17,
         title: "Simulation: Calculator with Functions",
         type: "simulation",
-        description: "Create functions for basic math operations and build a simple calculator program.",
-        template: `# Advanced Calculator with Functions
-
-def add(a, b):
-    """Add two numbers."""
-    return a + b
+        description: "Complete the four math functions and the divide-by-zero guard so the calculator works correctly.",
+        template: `def add(a, b):
+    # TODO: return a + b
+    pass
 
 def subtract(a, b):
-    """Subtract two numbers."""
-    return a - b
+    # TODO: return a - b
+    pass
 
 def multiply(a, b):
-    """Multiply two numbers."""
-    return a * b
+    # TODO: return a * b
+    pass
 
 def divide(a, b):
-    """Divide two numbers with error checking."""
-    if b == 0:
-        return "Error: Cannot divide by zero!"
-    return a / b
+    # TODO: return a / b, but if b is 0, return the string
+    # "Error: Cannot divide by zero!" instead of dividing
+    pass
 
-def calculate(num1, num2, operation):
-    """Perform calculation based on operation."""
-    if operation == "add":
-        return add(num1, num2)
-    elif operation == "subtract":
-        return subtract(num1, num2)
-    elif operation == "multiply":
-        return multiply(num1, num2)
-    elif operation == "divide":
-        return divide(num1, num2)
-    else:
-        return "Error: Unknown operation"
-
-# Test the calculator
-print("=" * 40)
-print("Advanced Calculator")
-print("=" * 40)
-
-result = calculate(10, 5, "add")
-print(f"10 + 5 = {result}")
-
-result = calculate(10, 5, "subtract")
-print(f"10 - 5 = {result}")
-
-result = calculate(10, 5, "multiply")
-print(f"10 × 5 = {result}")
-
-result = calculate(10, 5, "divide")
-print(f"10 ÷ 5 = {result}")
-
-result = calculate(10, 0, "divide")
-print(f"10 ÷ 0 = {result}")  # Error case
-
-print("=" * 40)`
+print(add(10, 5))
+print(subtract(10, 5))
+print(multiply(10, 5))
+print(divide(10, 5))
+print(divide(10, 0))`,
+        checks: [
+            { description: "add(10, 5) == 15", test: "add(10, 5) == 15", hint: "Just return a + b" },
+            { description: "subtract(10, 5) == 5", test: "subtract(10, 5) == 5", hint: "Just return a - b" },
+            { description: "multiply(10, 5) == 50", test: "multiply(10, 5) == 50", hint: "Just return a * b" },
+            { description: "divide(10, 5) == 2", test: "divide(10, 5) == 2", hint: "Return a / b" },
+            { description: "divide(10, 0) == \"Error: Cannot divide by zero!\"", test: "divide(10, 0) == \"Error: Cannot divide by zero!\"", hint: "Check if b == 0 before dividing, and return that exact string instead" }
+        ]
     },
 
     {
@@ -1598,37 +1518,32 @@ print("=" * 40)`
         id: 20,
         title: "Simulation: Read & Inspect a Document",
         type: "simulation",
-        description: "Create a sample document file, then read it back the way an ingestion script would - as raw text and as individual lines.",
-        template: `# Simulating a company doc export you'd ingest into your RAG pipeline
-doc_path = "meeting_notes.txt"
+        description: "Write `summarize_document(lines)` to return a dict describing a list of lines from a file.",
+        template: `doc_path = "meeting_notes.txt"
 
-# In real life this file already exists (exported from SharePoint, Confluence, etc.)
-# We create it first here so this example is fully runnable on its own.
 with open(doc_path, "w", encoding="utf-8") as f:
     f.write("Q3 Planning Meeting\\n")
     f.write("Attendees: Sam, Priya, Alex\\n")
     f.write("Decision: Migrate the ingestion pipeline to Azure Functions.\\n")
     f.write("Action item: Priya to document the chunking strategy by Friday.\\n")
 
-print(f"Wrote {doc_path}")
-print("-" * 40)
-
-# Now read it back, the way your ingestion script would
 with open(doc_path, "r", encoding="utf-8") as f:
     lines = f.readlines()
 
-print(f"Document has {len(lines)} lines")
-print("-" * 40)
+def summarize_document(lines):
+    # TODO: return a dict with two keys:
+    #   "line_count"  -> how many lines are in the list
+    #   "total_chars" -> the total number of characters across all lines
+    #                    (hint: use len() on each line and sum them)
+    pass
 
-for i, line in enumerate(lines, start=1):
-    print(f"{i}: {line.strip()}")
-
-# Grab the whole thing as one string too - useful for chunking later
-with open(doc_path, "r", encoding="utf-8") as f:
-    full_text = f.read()
-
-print("-" * 40)
-print(f"Total characters: {len(full_text)}")`
+summary = summarize_document(lines)
+print(summary)`,
+        checks: [
+            { description: "2-line input gives {\"line_count\": 2, \"total_chars\": 7}", test: "(lambda r: r == {\"line_count\": 2, \"total_chars\": 7})(summarize_document([\"abc\\n\", \"de\\n\"]))", hint: "total_chars should add up len() of every line, including the newline character" },
+            { description: "an empty list gives line_count 0 and total_chars 0", test: "(lambda r: r == {\"line_count\": 0, \"total_chars\": 0})(summarize_document([]))", hint: "len([]) is 0, and sum() of nothing is 0" },
+            { description: "the real document has 4 lines", test: "summarize_document(lines)[\"line_count\"] == 4", hint: "The dict needs a \"line_count\" key equal to len(lines)" }
+        ]
     },
     {
         id: 21,
@@ -1707,39 +1622,27 @@ text.split()  # ['Azure', 'OpenAI', 'Service']</pre>
         id: 23,
         title: "Simulation: Build a Text Chunker",
         type: "simulation",
-        description: "Write a real fixed-size chunker with overlap - the same core idea used by production RAG chunking libraries.",
-        template: `# A tiny (but real) fixed-size chunker with overlap - the same idea
-# used by LangChain's RecursiveCharacterTextSplitter, just simplified.
-
-document = (
+        description: "Write `chunk_text(text, chunk_size, overlap)` to split text into overlapping chunks.",
+        template: `document = (
     "Azure OpenAI Service provides REST API access to OpenAI's powerful language models "
-    "including GPT-4o and text-embedding-3-large. These models can be applied to a variety "
-    "of tasks such as content generation, summarization, semantic search, and natural "
-    "language to code translation. Users can access the service through REST APIs, Python "
-    "SDK, or a web-based interface in Azure AI Studio."
+    "including GPT-4o and text-embedding-3-large."
 )
 
-def chunk_text(text, chunk_size=80, overlap=20):
-    chunks = []
-    start = 0
-    while start < len(text):
-        end = start + chunk_size
-        chunks.append(text[start:end])
-        start += chunk_size - overlap
-    return chunks
+def chunk_text(text, chunk_size, overlap):
+    # TODO: return a list of chunks. Start at index 0, take a slice of
+    # length chunk_size, then move the start forward by (chunk_size - overlap)
+    # and repeat until you've covered the whole string.
+    pass
 
-chunks = chunk_text(document, chunk_size=80, overlap=20)
-
-print(f"Document length: {len(document)} characters")
-print(f"Split into {len(chunks)} chunks")
-print("=" * 50)
-
-for i, chunk in enumerate(chunks, start=1):
-    print(f"Chunk {i} ({len(chunk)} chars): {chunk!r}")
-
-print("=" * 50)
-print("Notice how the end of each chunk reappears at the start of the next -")
-print("that overlap keeps sentences from getting cut off mid-thought.")`
+chunks = chunk_text(document, 40, 10)
+for c in chunks:
+    print(repr(c))`,
+        checks: [
+            { description: "chunk_text(\"abcdefghij\", 5, 0) splits into 2 clean chunks", test: "chunk_text(\"abcdefghij\", 5, 0) == [\"abcde\", \"fghij\"]", hint: "With overlap 0, each chunk should start right where the last one ended" },
+            { description: "text shorter than chunk_size stays as one chunk", test: "chunk_text(\"hello\", 10, 0) == [\"hello\"]", hint: "A slice past the end of a string just returns what's left - no error needed" },
+            { description: "a 100-character string with chunk_size 20 and no overlap makes 5 chunks", test: "len(chunk_text(\"x\" * 100, 20, 0)) == 5", hint: "100 / 20 = 5 equal chunks" },
+            { description: "overlap actually repeats text between chunks", test: "chunk_text(\"abcdefghij\", 4, 2) == [\"abcd\", \"cdef\", \"efgh\", \"ghij\", \"ij\"]", hint: "Advance the start by (chunk_size - overlap) each time, not by chunk_size" }
+        ]
     },
     {
         id: 24,
@@ -1808,51 +1711,37 @@ output = json.dumps(python_data)   # Python dict/list -> JSON string</pre>
         id: 26,
         title: "Simulation: Parse an API-Style JSON Response",
         type: "simulation",
-        description: "Parse a realistic Azure OpenAI-shaped JSON response, pull out the fields you'd actually need, and turn data back into JSON.",
+        description: "Write `extract_answer(response)` and `extract_token_usage(response)` to pull fields out of an API-shaped dict.",
         template: `import json
 
-# This is what a (simplified) chat completion response from Azure OpenAI looks like
 api_response_text = """
 {
   "id": "chatcmpl-abc123",
-  "model": "gpt-4o",
   "choices": [
-    {
-      "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": "Chunking splits documents into smaller pieces before embedding them."
-      },
-      "finish_reason": "stop"
-    }
+    {"message": {"role": "assistant", "content": "Chunking splits documents into smaller pieces."}}
   ],
-  "usage": {
-    "prompt_tokens": 42,
-    "completion_tokens": 15,
-    "total_tokens": 57
-  }
+  "usage": {"prompt_tokens": 42, "completion_tokens": 15, "total_tokens": 57}
 }
 """
 
 response = json.loads(api_response_text)
 
-print("Parsed a JSON string into a Python dict!")
-print("Type:", type(response))
-print("=" * 50)
+def extract_answer(response):
+    # TODO: return the assistant's reply text from the response dict
+    pass
 
-answer = response["choices"][0]["message"]["content"]
-print(f"Model answer: {answer}")
+def extract_token_usage(response):
+    # TODO: return the total_tokens value from the response dict
+    pass
 
-tokens_used = response["usage"]["total_tokens"]
-print(f"Tokens used: {tokens_used}")
-
-# .get() is safer than [] when a field MIGHT be missing
-system_fingerprint = response.get("system_fingerprint", "not provided")
-print(f"System fingerprint: {system_fingerprint}")
-
-print("=" * 50)
-print("Turning it back into a JSON string (e.g. to log or save it):")
-print(json.dumps({"answer": answer, "tokens": tokens_used}, indent=2))`
+print(extract_answer(response))
+print(extract_token_usage(response))`,
+        checks: [
+            { description: "extract_answer() pulls the assistant's reply text", test: "extract_answer(response) == \"Chunking splits documents into smaller pieces.\"", hint: "response[\"choices\"][0][\"message\"][\"content\"]" },
+            { description: "extract_token_usage() pulls the total token count", test: "extract_token_usage(response) == 57", hint: "response[\"usage\"][\"total_tokens\"]" },
+            { description: "extract_answer() works on a different response, not just this one", test: "(lambda r: extract_answer(r) == \"hi\")({\"choices\": [{\"message\": {\"content\": \"hi\"}}]})", hint: "Make sure you're navigating the dict structure generically, not hardcoding a value" },
+            { description: "extract_token_usage() works on a different response too", test: "(lambda r: extract_token_usage(r) == 99)({\"usage\": {\"total_tokens\": 99}})", hint: "Same idea - read the value from the dict, don't hardcode it" }
+        ]
     },
     {
         id: 27,
@@ -1924,36 +1813,21 @@ finally:
         id: 29,
         title: "Simulation: Handle Errors Like a Pro",
         type: "simulation",
-        description: "Validate a batch of embedding vectors, catching and logging bad ones instead of letting one bad record crash the whole job.",
-        template: `import logging
+        description: "Write `safe_divide(a, b)` that divides two numbers but never crashes on division by zero.",
+        template: `def safe_divide(a, b):
+    # TODO: return a / b
+    # but if b is 0, catch the error and return the string
+    # "Error: division by zero" instead of crashing
+    pass
 
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-
-def get_embedding_dimension(vector):
-    if not isinstance(vector, list):
-        raise TypeError(f"Expected a list, got {type(vector).__name__}")
-    if len(vector) == 0:
-        raise ValueError("Embedding vector is empty - something upstream went wrong")
-    return len(vector)
-
-test_vectors = [
-    [0.12, 0.98, -0.44],
-    [],
-    "not-a-vector",
-]
-
-for i, vec in enumerate(test_vectors, start=1):
-    print(f"--- Checking vector {i}: {vec!r} ---")
-    try:
-        dim = get_embedding_dimension(vec)
-        print(f"OK: dimension = {dim}")
-    except (TypeError, ValueError) as e:
-        logging.error(f"Vector {i} failed validation: {e}")
-    finally:
-        print()
-
-print("Pipeline kept running even though 2 of 3 vectors were bad -")
-print("that's the whole point of try/except in a real ingestion job.")`
+print(safe_divide(10, 2))
+print(safe_divide(10, 0))`,
+        checks: [
+            { description: "safe_divide(10, 2) == 5", test: "safe_divide(10, 2) == 5", hint: "For non-zero b, just return a / b" },
+            { description: "safe_divide(9, 3) == 3", test: "safe_divide(9, 3) == 3", hint: "For non-zero b, just return a / b" },
+            { description: "safe_divide(10, 0) == \"Error: division by zero\"", test: "safe_divide(10, 0) == \"Error: division by zero\"", hint: "Wrap the division in try/except ZeroDivisionError, or check if b == 0 first" },
+            { description: "safe_divide never raises an exception, even on bad input", test: "isinstance(safe_divide(-8, 0), (str, int, float))", hint: "Make sure every path through your function returns a value instead of crashing" }
+        ]
     },
     {
         id: 30,
@@ -2020,36 +1894,31 @@ api_key = os.environ.get("AZURE_OPENAI_API_KEY")</pre>
         id: 32,
         title: "Simulation: Load Config the Safe Way",
         type: "simulation",
-        description: "Load required settings from environment variables, fail fast with a clear error if one is missing, and mask secrets before printing them.",
+        description: "Write `get_required_env(name)` that reads an environment variable and fails loudly if it's missing.",
         template: `import os
 
-# In real life you'd set these OUTSIDE your code - e.g. in a .env file
-# loaded by python-dotenv, or as real environment variables in Azure.
-# We set them here only so this demo is self-contained and runnable.
 os.environ["AZURE_OPENAI_ENDPOINT"] = "https://my-company.openai.azure.com/"
-os.environ["AZURE_OPENAI_API_KEY"] = "sk-demo-not-a-real-key-12345"
 
 def get_required_env(name):
-    value = os.environ.get(name)
-    if not value:
-        raise RuntimeError(f"Missing required environment variable: {name}")
-    return value
+    # TODO: return os.environ[name] if it's set.
+    # If it's missing (or empty), raise:
+    #   RuntimeError(f"Missing required environment variable: {name}")
+    pass
 
-endpoint = get_required_env("AZURE_OPENAI_ENDPOINT")
-api_key = get_required_env("AZURE_OPENAI_API_KEY")
-
-print(f"Endpoint: {endpoint}")
-print(f"API key loaded: {'*' * (len(api_key) - 4)}{api_key[-4:]}")
-
-print("-" * 50)
+print(get_required_env("AZURE_OPENAI_ENDPOINT"))`,
+        checks: [
+            { description: "returns the value when the variable is set", test: "get_required_env(\"AZURE_OPENAI_ENDPOINT\") == \"https://my-company.openai.azure.com/\"", hint: "os.environ.get(name) reads the variable's value" },
+            { description: "raises RuntimeError with the right message when missing", test: `
 try:
-    get_required_env("AZURE_STORAGE_CONNECTION_STRING")
+    get_required_env("TOTALLY_MISSING_VAR_XYZ")
+    _result = False
 except RuntimeError as e:
-    print(f"Caught it before it caused a confusing crash later: {e}")
-
-print("-" * 50)
-print("Rule of thumb: if a value is secret or changes per environment")
-print("(dev vs prod), it belongs in an env var - never in your .py file.")`
+    _result = (str(e) == "Missing required environment variable: TOTALLY_MISSING_VAR_XYZ")
+except Exception:
+    _result = False
+_result
+`, hint: "Check `if not value:` and raise RuntimeError(f\"Missing required environment variable: {name}\")" }
+        ]
     },
     {
         id: 33,
@@ -2121,31 +1990,22 @@ token = credential.get_token("https://cognitiveservices.azure.com/.default")</pr
         id: 35,
         title: "Simulation: Mock the DefaultAzureCredential Fallback Chain",
         type: "simulation",
-        description: "See the logic behind DefaultAzureCredential's fallback chain by building a simplified mock version of it - the same idea as the real azure-identity package, without needing real Azure access.",
-        template: `# A simplified MOCK of how azure-identity's DefaultAzureCredential works,
-# so you can see the *logic* without needing real Azure access here.
-# In a real script you'd just write:
-#   from azure.identity import DefaultAzureCredential
-#   credential = DefaultAzureCredential()
-
-class MockDefaultAzureCredential:
+        description: "Complete `get_token()` so it tries each auth method in order and falls back correctly, like the real DefaultAzureCredential does.",
+        template: `class MockDefaultAzureCredential:
     """Tries multiple auth methods in order, like the real one does."""
 
     def __init__(self, env):
-        self.env = env  # stand-in for real environment/managed identity checks
+        self.env = env
 
     def get_token(self):
-        methods = [
-            ("Managed Identity", self._try_managed_identity),
-            ("Environment variables (service principal)", self._try_env_service_principal),
-            ("Azure CLI login", self._try_azure_cli),
-        ]
-        for name, method in methods:
-            token = method()
-            if token:
-                print(f"Authenticated using: {name}")
-                return token
-        raise RuntimeError("No credential source worked - check your auth setup")
+        # TODO: try each method below in order, returning the first
+        # non-empty token you get back:
+        #   1. self._try_managed_identity()
+        #   2. self._try_env_service_principal()
+        #   3. self._try_azure_cli()
+        # If none of them return a token, raise:
+        #   RuntimeError("No credential source worked - check your auth setup")
+        pass
 
     def _try_managed_identity(self):
         return self.env.get("MANAGED_IDENTITY_TOKEN")
@@ -2161,25 +2021,24 @@ class MockDefaultAzureCredential:
         return self.env.get("AZ_CLI_TOKEN")
 
 
-print("Scenario 1: Running on an Azure VM/Function with a Managed Identity")
 cred = MockDefaultAzureCredential({"MANAGED_IDENTITY_TOKEN": "mi-token-abc"})
-print("Token:", cred.get_token())
-
-print()
-print("Scenario 2: Running locally with a service principal in env vars")
-cred = MockDefaultAzureCredential({
-    "AZURE_CLIENT_ID": "11111111-aaaa-bbbb-cccc-222222222222",
-    "AZURE_CLIENT_SECRET": "super-secret-value",
-})
-print("Token:", cred.get_token())
-
-print()
-print("Scenario 3: Nothing configured")
-cred = MockDefaultAzureCredential({})
+print(cred.get_token())`,
+        checks: [
+            { description: "uses Managed Identity when it's available", test: "MockDefaultAzureCredential({\"MANAGED_IDENTITY_TOKEN\": \"mi-token-abc\"}).get_token() == \"mi-token-abc\"", hint: "Try _try_managed_identity() first" },
+            { description: "falls back to the service principal env vars", test: "MockDefaultAzureCredential({\"AZURE_CLIENT_ID\": \"abc123\", \"AZURE_CLIENT_SECRET\": \"shh\"}).get_token() == \"token-for-abc123\"", hint: "If managed identity returns nothing, try _try_env_service_principal() next" },
+            { description: "falls back to the Azure CLI login as a last resort", test: "MockDefaultAzureCredential({\"AZ_CLI_TOKEN\": \"cli-token-1\"}).get_token() == \"cli-token-1\"", hint: "If both earlier methods return nothing, try _try_azure_cli()" },
+            { description: "prefers Managed Identity even when other methods are also available", test: "MockDefaultAzureCredential({\"MANAGED_IDENTITY_TOKEN\": \"mi-1\", \"AZ_CLI_TOKEN\": \"cli-1\"}).get_token() == \"mi-1\"", hint: "Check the methods in order and stop at the first one that works" },
+            { description: "raises the right error when nothing is configured", test: `
 try:
-    cred.get_token()
+    MockDefaultAzureCredential({}).get_token()
+    _result = False
 except RuntimeError as e:
-    print("Failed as expected:", e)`
+    _result = (str(e) == "No credential source worked - check your auth setup")
+except Exception:
+    _result = False
+_result
+`, hint: "If all three methods return None, raise RuntimeError with that exact message" }
+        ]
     },
     {
         id: 36,
@@ -2261,23 +2120,10 @@ def cosine_similarity(a, b):
         id: 38,
         title: "Simulation: Mini RAG Pipeline (Capstone)",
         type: "simulation",
-        description: "Chunk text, embed it, store it, and run a similarity search - the full retrieval half of a RAG pipeline in one runnable script.",
+        description: "Write `cosine_similarity(a, b)` - the math at the heart of every vector search.",
         template: `import math
 import hashlib
 
-# --- Step 1: chunks you've already produced (see Module 9) ---
-chunks = [
-    "Azure Functions is a serverless compute service for running small pieces of code.",
-    "Chunking splits long documents into smaller passages before embedding them.",
-    "A vector store lets you search documents by semantic similarity, not just keywords.",
-    "Managed identities let Azure resources authenticate without storing secrets.",
-]
-
-# --- Step 2: turn each chunk into a vector ---
-# In real life: call Azure OpenAI's embeddings endpoint and get back a
-# real semantic vector (e.g. 1536 numbers). We fake a small vector here
-# so this demo runs instantly with no network call - the storing and
-# comparing logic below works identically either way.
 def fake_embed(text, dims=8):
     vector = []
     for i in range(dims):
@@ -2286,36 +2132,35 @@ def fake_embed(text, dims=8):
     return vector
 
 def cosine_similarity(a, b):
-    dot = sum(x * y for x, y in zip(a, b))
-    mag_a = math.sqrt(sum(x * x for x in a))
-    mag_b = math.sqrt(sum(y * y for y in b))
-    return dot / (mag_a * mag_b) if mag_a and mag_b else 0
+    # TODO: implement cosine similarity between two equal-length vectors:
+    #   (dot product of a and b) / (magnitude of a * magnitude of b)
+    # Return 0 if either magnitude is 0, to avoid dividing by zero.
+    pass
 
-# --- Step 3: build a tiny in-memory vector store ---
+chunks = [
+    "Azure Functions is a serverless compute service for running small pieces of code.",
+    "Chunking splits long documents into smaller passages before embedding them.",
+    "A vector store lets you search documents by semantic similarity, not just keywords.",
+    "Managed identities let Azure resources authenticate without storing secrets.",
+]
+
 vector_store = [(chunk, fake_embed(chunk)) for chunk in chunks]
-print(f"Indexed {len(vector_store)} chunks into the vector store")
+query_vector = fake_embed("How do I avoid storing secrets for Azure authentication?")
 
-# --- Step 4: embed the user's question and search ---
-query = "How do I avoid storing secrets for Azure authentication?"
-query_vector = fake_embed(query)
+results = sorted(
+    ((cosine_similarity(query_vector, vector), chunk) for chunk, vector in vector_store),
+    reverse=True,
+)
 
-results = []
-for chunk, vector in vector_store:
-    score = cosine_similarity(query_vector, vector)
-    results.append((score, chunk))
-
-results.sort(reverse=True)
-
-print(f"\\nQuery: {query}")
-print("=" * 50)
-for rank, (score, chunk) in enumerate(results, start=1):
-    print(f"{rank}. (score={score:.3f}) {chunk}")
-
-print("=" * 50)
-print("Note: these are FAKE vectors (hashed text, not real semantics),")
-print("so the ranking above won't necessarily make sense - that's expected!")
-print("Swap fake_embed() for a real Azure OpenAI embeddings call and the")
-print("SAME cosine_similarity + sort logic becomes real semantic search.")`
+for score, chunk in results:
+    print(f"{score:.3f} - {chunk}")`,
+        checks: [
+            { description: "identical vectors have similarity 1", test: "abs(cosine_similarity([1, 0], [1, 0]) - 1) < 1e-9", hint: "dot([1,0],[1,0]) = 1, magnitudes are both 1, so 1/1 = 1" },
+            { description: "perpendicular vectors have similarity 0", test: "abs(cosine_similarity([1, 0], [0, 1])) < 1e-9", hint: "dot([1,0],[0,1]) = 0, so the result should be 0 regardless of magnitude" },
+            { description: "opposite vectors have similarity -1", test: "abs(cosine_similarity([1, 0], [-1, 0]) - (-1)) < 1e-9", hint: "dot([1,0],[-1,0]) = -1, magnitudes are both 1, so -1/1 = -1" },
+            { description: "works correctly on non-unit vectors too", test: "abs(cosine_similarity([3, 4], [3, 4]) - 1) < 1e-9", hint: "Any vector compared to itself should have similarity 1, regardless of length" },
+            { description: "a zero vector returns 0 instead of crashing", test: "cosine_similarity([0, 0], [1, 1]) == 0", hint: "Check if either magnitude is 0 before dividing" }
+        ]
     },
     {
         id: 39,
@@ -2679,6 +2524,7 @@ function displaySimulation(module) {
     document.getElementById('simDescription').textContent = module.description;
     document.getElementById('codeInput').value = module.template;
     document.getElementById('codeOutput').innerHTML = '';
+    document.getElementById('simResultsDiv').classList.add('hidden');
 
     // Start fetching the Python runtime now so it's likely ready by the time
     // the learner clicks "Run" instead of making them wait on first use.
@@ -2689,14 +2535,29 @@ function displaySimulation(module) {
 let pyodideReadyPromise = null;
 let pyodideOutputLines = [];
 
+// Runs once, right after Pyodide loads. Captures every global name that
+// exists before any learner code has run, and defines _reset_user_globals()
+// to wipe everything defined since - so each Run starts from a clean slate
+// instead of a wrong answer's leftover variables silently passing later checks.
+const PYODIDE_INIT_CODE = `
+_BASELINE_NAMES = set(globals().keys())
+_BASELINE_NAMES.add("_BASELINE_NAMES")
+_BASELINE_NAMES.add("_reset_user_globals")
+
+def _reset_user_globals():
+    for _n in [n for n in globals().keys() if n not in _BASELINE_NAMES]:
+        del globals()[_n]
+`;
+
 function getPyodideRuntime() {
     if (!pyodideReadyPromise) {
         const load = typeof loadPyodide === 'undefined'
             ? Promise.reject(new Error('The Python runtime failed to load. Check your internet connection and reload the page.'))
-            : loadPyodide().then(pyodide => {
+            : loadPyodide().then(async pyodide => {
                 const capture = (line) => pyodideOutputLines.push(line);
                 pyodide.setStdout({ batched: capture });
                 pyodide.setStderr({ batched: capture });
+                await pyodide.runPythonAsync(PYODIDE_INIT_CODE);
                 return pyodide;
             });
 
@@ -2720,27 +2581,89 @@ function formatPythonError(error) {
     return (lastExecFrame === -1 ? lines : lines.slice(lastExecFrame)).join('\n');
 }
 
+// Run each of a simulation's checks against whatever the learner's code just
+// defined, and render an explicit pass/fail verdict - not just raw output.
+async function gradeSimulation(pyodide, module) {
+    const resultsDiv = document.getElementById('simResultsDiv');
+    resultsDiv.classList.remove('hidden', 'success', 'error');
+
+    const results = [];
+    for (const check of module.checks) {
+        let passed;
+        try {
+            const value = await pyodide.runPythonAsync(check.test);
+            passed = !!value;
+        } catch (e) {
+            passed = false;
+        }
+        results.push({ description: check.description, hint: check.hint, passed });
+    }
+
+    const allPassed = results.every(r => r.passed);
+    resultsDiv.classList.add(allPassed ? 'success' : 'error');
+
+    const items = results.map(r => `
+        <li style="margin-top: 8px; list-style: none;">
+            <strong>${r.passed ? '✓' : '✗'}</strong> ${escapeHtml(r.description)}
+            ${!r.passed && r.hint ? `<div style="margin-top: 2px; margin-left: 20px; font-size: 0.9em; opacity: 0.85;">💡 ${escapeHtml(r.hint)}</div>` : ''}
+        </li>
+    `).join('');
+    const passedCount = results.filter(r => r.passed).length;
+
+    resultsDiv.innerHTML = `
+        <strong>${allPassed ? '✓ All checks passed - nice work!' : `${passedCount} of ${results.length} checks passed`}</strong>
+        <ul style="margin: 10px 0 0; padding: 0;">${items}</ul>
+    `;
+
+    if (allPassed) {
+        markModuleAsCompleted();
+    }
+}
+
 // Run code simulation
 async function runCode() {
     const code = document.getElementById('codeInput').value;
     const output = document.getElementById('codeOutput');
     const runBtn = document.getElementById('runBtn');
+    const resultsDiv = document.getElementById('simResultsDiv');
     const originalLabel = runBtn.textContent;
+    const module = trainingModules[currentModuleIndex];
 
     runBtn.disabled = true;
     output.innerHTML = '<p style="color: #999;">Starting Python…</p>';
+    resultsDiv.classList.add('hidden');
 
     try {
         const pyodide = await getPyodideRuntime();
         runBtn.textContent = '▶ Running…';
         pyodideOutputLines = [];
 
-        await pyodide.runPythonAsync(code);
+        await pyodide.runPythonAsync('_reset_user_globals()');
 
-        if (pyodideOutputLines.length === 0) {
+        let runError = null;
+        try {
+            await pyodide.runPythonAsync(code);
+        } catch (error) {
+            runError = error;
+        }
+
+        if (runError) {
+            const priorOutput = pyodideOutputLines.map(line => `<div>${escapeHtml(line)}</div>`).join('');
+            output.innerHTML = priorOutput + `<div style="color: #ff6b6b; white-space: pre-wrap;"><strong>Error:</strong>\n${escapeHtml(formatPythonError(runError))}</div>`;
+        } else if (pyodideOutputLines.length === 0) {
             output.innerHTML = '<p style="color: #999;">No output (program ran successfully)</p>';
         } else {
             output.innerHTML = pyodideOutputLines.map(line => `<div>${escapeHtml(line)}</div>`).join('');
+        }
+
+        if (Array.isArray(module.checks)) {
+            if (runError) {
+                resultsDiv.classList.remove('hidden', 'success');
+                resultsDiv.classList.add('error');
+                resultsDiv.innerHTML = "<strong>✗ Can't check your solution yet</strong><p style=\"margin-top: 8px; font-size: 0.95em;\">Fix the error above, then run it again.</p>";
+            } else {
+                await gradeSimulation(pyodide, module);
+            }
         }
     } catch (error) {
         output.innerHTML = `<div style="color: #ff6b6b; white-space: pre-wrap;"><strong>Error:</strong>\n${escapeHtml(formatPythonError(error))}</div>`;

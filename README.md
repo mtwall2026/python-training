@@ -15,10 +15,10 @@ A comprehensive, interactive web-based Python training program designed for comp
 - Immediate feedback on answers
 - Progress tracking through the quiz
 
-💻 **Code Simulations**
-- Practice writing Python code directly in the browser
+💻 **Graded Code Exercises**
+- Each simulation gives you a task and starter code with a blank (`TODO`) to fill in - not a finished example to just run and watch
 - Runs *real* Python (via [Pyodide](https://pyodide.org), CPython compiled to WebAssembly) — not a JavaScript approximation, so f-strings, `print()`, list/dict methods, and real Python errors all behave exactly as they would on your machine
-- Hands-on exercises for each topic
+- Every "Run" automatically checks your solution against real test cases and tells you exactly what passed and what didn't (with a hint), instead of just showing raw output
 
 📊 **Progress Tracking**
 - Visual progress bar showing completion percentage
