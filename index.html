@@ -13,6 +13,7 @@
     <div class="container">
         <header class="training-header">
             <button id="sidebarToggle" onclick="toggleSidebar()" aria-label="Menu">☰</button>
+            <button id="homeBtn" onclick="goToModule(0)" class="btn-home" title="Go to first module">🏠</button>
             <h1>🐍 Python Training Program</h1>
             <p>Learn Python from Scratch - Interactive Training for Beginners</p>
             <div class="progress-bar">
@@ -32,7 +33,8 @@
                     <h4>Your Stats</h4>
                     <p>✓ Completed: <span id="completedCount">0</span></p>
                     <p>📚 Total: <span id="totalCount">0</span></p>
-                    <button onclick="resetProgress()" class="btn-reset">Reset Progress</button>
+                    <button onclick="goToModule(0)" class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">Start from Beginning</button>
+                    <button onclick="resetProgress()" class="btn-reset">Clear All Progress</button>
                 </div>
             </aside>
 

@@ -1735,6 +1735,15 @@ function escapeHtml(text) {
 }
 
 // Navigation
+function goToModule(index) {
+    if (index >= 0 && index < trainingModules.length) {
+        currentModuleIndex = index;
+        currentQuestionIndex = 0;
+        displayCurrentModule();
+        closeSidebarOnMobile();
+    }
+}
+
 function nextLesson() {
     if (currentModuleIndex < trainingModules.length - 1) {
         currentModuleIndex++;
