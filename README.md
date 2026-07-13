@@ -1,12 +1,14 @@
 # Python Training Program for Beginners
 
-A comprehensive, interactive web-based Python training program designed for complete beginners to learn Python step-by-step with lessons, quizzes, and code simulations.
+A comprehensive, interactive web-based Python training program designed for complete beginners to learn Python step-by-step with lessons, quizzes, and code simulations - starting from the fundamentals and building up to practical skills for RAG (Retrieval-Augmented Generation) pipelines on Azure: chunking, ingestion, authentication/SSO, calling APIs, and embeddings, plus the Linux command line skills to run and troubleshoot it all.
 
 ## Features
 
 ✨ **Interactive Learning Modules**
-- 7 comprehensive lessons covering Python fundamentals
-- Topics include: Introduction, Variables, Operations, Conditionals, Loops, Lists/Dictionaries, and Functions
+- 16 modules across two tracks: Python fundamentals (1-7), then Python for RAG engineering and Linux (8-16)
+- Fundamentals: Introduction, Variables, Operations, Conditionals, Loops, Lists/Dictionaries, and Functions
+- RAG track: Files & Text, Chunking, JSON, Troubleshooting, Packages & Secrets, Azure Authentication/SSO, APIs & Embeddings (capstone)
+- Linux track: Command Line Essentials, and Running/Scheduling/Troubleshooting Python on Linux
 
 🎯 **Multiple Choice Quizzes**
 - 5-question quizzes after each major topic
@@ -68,6 +70,42 @@ A comprehensive, interactive web-based Python training program designed for comp
 - Defining and calling functions
 - Parameters and return values
 - Default parameters
+
+### Module 8: Files & Text
+- Reading and writing files safely with `with open(...)`
+- Why `encoding="utf-8"` matters for real-world documents
+
+### Module 9: Chunking Text for RAG
+- String slicing and splitting
+- Building a fixed-size chunker with overlap
+
+### Module 10: JSON in the Wild
+- Parsing and building JSON with the `json` module
+- Safely navigating nested API responses with `.get()`
+
+### Module 11: When Things Go Wrong
+- try/except/finally and reading tracebacks
+- Raising your own errors, and logging vs. print()
+
+### Module 12: Packages, Environments & Secrets
+- pip, requirements.txt, and virtual environments
+- Loading secrets from environment variables instead of hardcoding them
+
+### Module 13: Authentication the Azure Way
+- API keys vs. Azure AD (SSO) authentication
+- Service principals, managed identities, and `DefaultAzureCredential`
+
+### Module 14: Talking to APIs & Embeddings (Capstone)
+- Calling REST APIs with `requests`
+- What embeddings and cosine similarity are, and building a mini RAG retrieval pipeline
+
+### Module 15: Linux Command Line Essentials
+- Navigating, reading files, and permissions
+- Installing packages and finding things on Linux
+
+### Module 16: Running, Scheduling & Troubleshooting Python on Linux
+- venvs and environment variables from the shell
+- Logs, cron, systemd, and quick health checks
 
 ## How to Use
 
